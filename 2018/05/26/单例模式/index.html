@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="uwkit&#39;site">
 <meta property="og:description" content="单例设计模式确保对于一个给定的类只有一个实例存在，这个实例有一个全局唯一的访问点。通常采用懒加载的方式在第一次用到实例的时候再去创建它。 作用保证在程序运行过程中，一个类只有一个实例且易于外界访问，从而方便地控制了实例个数，并节约系统资源 使用场合统一管理资源或共享一份资源。比如，登录控制器，网络数据请求等。 优缺点优点 保证在程序运行过程中，一个类只有一个实例且易于外界访问，从而方便地控制了实例">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-26T07:18:29.000Z">
+<meta property="og:updated_time" content="2018-05-26T07:23:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="单例模式">
 <meta name="twitter:description" content="单例设计模式确保对于一个给定的类只有一个实例存在，这个实例有一个全局唯一的访问点。通常采用懒加载的方式在第一次用到实例的时候再去创建它。 作用保证在程序运行过程中，一个类只有一个实例且易于外界访问，从而方便地控制了实例个数，并节约系统资源 使用场合统一管理资源或共享一份资源。比如，登录控制器，网络数据请求等。 优缺点优点 保证在程序运行过程中，一个类只有一个实例且易于外界访问，从而方便地控制了实例">
@@ -100,7 +100,7 @@
 <li>使用<code>dispatch_once</code>执行初始化的<code>blokc</code>，一旦类已经被初始化，初始化器将永远不会再被调用。</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">+ (LocationManager *)sharedLocationManager &#123;</span><br><span class="line">return [[self alloc]init];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (id)copyWithZone:(NSZone *)zone &#123;</span><br><span class="line">return _shareLocationManager;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (id)mutableCopyWithZone:(NSZone *)zone &#123;</span><br><span class="line">return _shareLocationManager;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当调用<code>sharedLocationManager `</code>alloc<code></code>copy`的时候，将得到的实例都是一样的。</p>
+<p>当调用<code>sharedLocationManager</code>  <code>alloc</code>  <code>copy</code>的时候，将得到的实例都是一样的。</p>
 <h6 id="static"><a href="#static" class="headerlink" title="static"></a><code>static</code></h6><ol>
 <li>修饰局部变量<br>保证局部变量永远只初始化一次，在程序的运行过程中永远只有一份内存，生命周期类似全局变量，但是作用域不变。</li>
 <li>修饰全局变量<br>使得全局变量的作用域仅限于当前的文件内部，即只有当前文件内部才能访问该全局变量。</li>
