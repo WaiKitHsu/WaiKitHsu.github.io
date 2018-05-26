@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-05-26T07:23:05.000Z</updated>
+  <updated>2018-05-26T13:50:25.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>响应链</title>
+    <link href="http://yoursite.com/2018/05/26/%E5%93%8D%E5%BA%94%E9%93%BE/"/>
+    <id>http://yoursite.com/2018/05/26/响应链/</id>
+    <published>2018-05-26T13:49:42.000Z</published>
+    <updated>2018-05-26T13:50:25.000Z</updated>
+    
+    <content type="html"><![CDATA[<h5 id="响应者对象"><a href="#响应者对象" class="headerlink" title="响应者对象"></a>响应者对象</h5><p>指可以接收并处理事件的对象。 <code>UIResponder</code> 是所有响应者对象的基类。</p><p>而在一下几种情况下不能接收事件：</p><ol><li><code>view.userInteractionEnabled = NO</code> 不与用户交互</li><li><code>view.hidden = NO</code> 隐藏</li><li><code>view.alpha = 0</code> 透明</li><li>正常情况下，对子视图在父视图之外的区域不会被识别</li></ol><h5 id="响应者链"><a href="#响应者链" class="headerlink" title="响应者链"></a>响应者链</h5><p>是一系列连接在一起的响应者对象，它允许响应者对象将处理事件的责任传递给其他更高级别的对象。随着程序寻找能够处理事件的对象，事件就在响应者链中向上传递。<br>事件的传递是从上到下的，事件的响应是从下到上的。</p><h5 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h5><ol><li>可以通过重写<code>hitTest:withEvent:</code>设置事件处理的传递链，自己处理或者往后传递给其他响应者处理，甚至到最后<code>UIApplication</code>都不处理就丢弃事件。也可以让当前响应对象和它的下一响应对象同时对一次点击对象作出处理。</li><li>可以通过<code>pointInside: withEvent:</code>判断点是否被当前的响应者处理，也可以通过重写该方法更改响应对象的响应热区。</li></ol><h5 id="UIResponder响应者类"><a href="#UIResponder响应者类" class="headerlink" title="UIResponder响应者类"></a><code>UIResponder</code>响应者类</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//获取下一个响应者</span><br><span class="line">- (UIResponder*)nextResponder;</span><br><span class="line"></span><br><span class="line">//当它放弃对象响应者,可以设置自身成为第一响应者,默认为NO</span><br><span class="line">- (BOOL)canBecomeFirstResponder;</span><br><span class="line"></span><br><span class="line">//设置第一响应者</span><br><span class="line">- (BOOL)becomeFirstResponder;</span><br><span class="line"></span><br><span class="line">//如果一个对象可以放弃对象响应者就返回YES,默认返回YES</span><br><span class="line">- (BOOL)canResignFirstResponder;</span><br><span class="line"></span><br><span class="line">//放弃第一响应者</span><br><span class="line">- (BOOL)resignFirstResponder;</span><br><span class="line"></span><br><span class="line">//是否是第一响应者</span><br><span class="line">- (BOOL)isFirstResponder;</span><br></pre></td></tr></table></figure><p>一般响应的几种事件</p><ol><li><code>Touch Events</code>触摸事件</li><li><code>Press Events</code>点按事件</li><li><code>Motion Events</code>运动事件</li><li><code>RemoteControl Events</code>远程事件</li></ol><h5 id="从用户触屏开始到图形系统更新屏幕来响应结束"><a href="#从用户触屏开始到图形系统更新屏幕来响应结束" class="headerlink" title="从用户触屏开始到图形系统更新屏幕来响应结束"></a>从用户触屏开始到图形系统更新屏幕来响应结束</h5><ol><li>用户触屏</li><li>硬件报告触摸事件给<code>UIKit</code>框架</li><li><code>UIKit</code>框架将触摸事件打包成<code>UIEvent</code>对象，同时分发给适合的视图<code>Event Handing</code></li><li>视图中的事件处理代码可能进行以下的动作来响应：改变视图或者其子视图的属性；调用 <code>setNeedsLayout</code> 方法以标记该视图或者其子视图需要进行布局更新；调用 <code>setNeedsDisplay</code> 或者 <code>setNeedsDisplayInRect</code> 以标记该视图或者其子视图需要进行重画；通知一个控制器关于一些数据的更新</li><li>如果一个视图的几何结构改变了，<code>UIKit</code>会根据以下几条规则来更新它的子视图：自动重设尺寸 <code>Layout Changes Automatically Using Autoresizing Rules</code>；实现 <code>ayoutSubviews</code>  在定制视图中覆盖这个方法同时用它来调整任何子视图的位置和大小</li><li>如果任何视图的任何部分被标记为需要重画，UIKit 会要求视图重画自身<code>drawRect：</code></li><li>任何已经更新的视图会与应用余下的可视内容组合到一起，同时被发送到图形硬件去显示</li><li>图形硬件将已解释内容转化到屏幕上</li></ol><h5 id="事件的产生和传递"><a href="#事件的产生和传递" class="headerlink" title="事件的产生和传递"></a>事件的产生和传递</h5><p>事件产生之后，系统会将改时间加入到一个由<code>UIApplication</code>管理的事件队列中（队列先进先出）。<br><code>UIApplication</code>会从事件队列中取出最前面的事件，并将事件分发下去以便处理，通常会先发送到<code>Window</code>。</p><h5 id="Event-Handing事件分发"><a href="#Event-Handing事件分发" class="headerlink" title="Event Handing事件分发"></a><code>Event Handing</code>事件分发</h5><p>相应的路线：<br><code>First Responser -- &gt; The Window -- &gt;The Application -- &gt; App Delegate</code></p><ul><li><code>First Responser</code>指的是当前接收事件的响应者对象，即当前正在与用户进行交互。事件分发就是为了找出第一响应者，使其有机会首先处理事件。如果它没有进行处理，系统就会将事件传递给下一个响应者。</li><li>事件如果没有得到处理或者没有找到第一响应者，该事件就会沿着响应链往上回溯，到最后<code>UIApplication</code>都不处理就丢弃事件。</li><li>如果当前的<code>view</code>是控制器的<code>view</code>，那么控制器就是上一个响应者；如果当前的<code>view</code>不是控制器的<code>view</code>，那么父控件就是上一个响应者。</li></ul><h5 id="UIGestureRecognizer手势识别器"><a href="#UIGestureRecognizer手势识别器" class="headerlink" title="UIGestureRecognizer手势识别器"></a><code>UIGestureRecognizer</code>手势识别器</h5><p>是一个抽象类，定义了所有手势的基本行为，使用它的子类才能处理具体的手势。便于触摸事件的处理。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">UITapGestureRecognizer    //敲击</span><br><span class="line">UIPinchGestureRecognizer    //捏合，缩放</span><br><span class="line">UIRotationGestureRecognizer    //旋转</span><br><span class="line">UISwipeGestureRecognizer    //轻扫</span><br><span class="line">UIPanGestureRecognizer    //拖拽</span><br><span class="line">UIScreenEdgePanGestureRecognizer    //屏幕边缘侧滑</span><br><span class="line">UILongPressGestureRecognizer    //长按</span><br></pre></td></tr></table></figure></p><p>当有两个相关联的手势存在时，可以使用<code>[B requireGestureRecognizerToFail: A]</code>指定A手势在B手势确定失败了之后才触发。</p><h6 id="UITouch"><a href="#UITouch" class="headerlink" title="UITouch"></a><code>UITouch</code></h6><p>当用户用一根手指触摸屏幕时，会创建一个与手指相关联的<code>UITouch</code>对象。<br>当手指移动时，系统不会创建一个新的<code>UITouch</code>对象，而是更新其属性使之能一直保存着相关的信息。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//返回触摸的位置，该位置是针对触摸的 view 的坐标系，当传入参数为 nil 时，返回的是 window 的位置。</span><br><span class="line">- locationInView:</span><br><span class="line">//返回前一个触摸点的位置。</span><br><span class="line">- previousLocationInView:</span><br></pre></td></tr></table></figure></p><h6 id="UIEvent"><a href="#UIEvent" class="headerlink" title="UIEvent"></a><code>UIEvent</code></h6><p>每产生一个事件，就会产生一个<code>UIEvent</code>对象。可以通过<code>allTouches</code>方法获取得到触摸点的集合，可以判断多点触摸事件（单点触摸<code>touches</code>中只有一个<code>UITouch</code>）。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h5 id=&quot;响应者对象&quot;&gt;&lt;a href=&quot;#响应者对象&quot; class=&quot;headerlink&quot; title=&quot;响应者对象&quot;&gt;&lt;/a&gt;响应者对象&lt;/h5&gt;&lt;p&gt;指可以接收并处理事件的对象。 &lt;code&gt;UIResponder&lt;/code&gt; 是所有响应者对象的基类。&lt;/p&gt;
+&lt;
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>单例模式</title>
