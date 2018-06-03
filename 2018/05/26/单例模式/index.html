@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>uwkit&#39;site</title>
+  <title>单例模式 Singleton | uwkit&#39;site</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title: 单例模式 Singletondate: 2018-05-26 15:17:22tags:  单例设计模式确保对于一个给定的类只有一个实例存在，这个实例有一个全局唯一的访问点。通常采用懒加载的方式在第一次用到实例的时候再去创建它。 作用保证在程序运行过程中，一个类只有一个实例且易于外界访问，从而方便地控制了实例个数，并节约系统资源 使用场合统一管理资源或共享一份资源。比如，登录控制器">
+  <meta name="description" content="单例设计模式确保对于一个给定的类只有一个实例存在，这个实例有一个全局唯一的访问点。通常采用懒加载的方式在第一次用到实例的时候再去创建它。 作用保证在程序运行过程中，一个类只有一个实例且易于外界访问，从而方便地控制了实例个数，并节约系统资源 使用场合统一管理资源或共享一份资源。比如，登录控制器，网络数据请求等。 优缺点优点 保证在程序运行过程中，一个类只有一个实例且易于外界访问，从而方便地控制了实例">
 <meta property="og:type" content="article">
-<meta property="og:title" content="uwkit&#39;site">
+<meta property="og:title" content="单例模式 Singleton">
 <meta property="og:url" content="http://yoursite.com/2018/05/26/单例模式/index.html">
 <meta property="og:site_name" content="uwkit&#39;site">
-<meta property="og:description" content="title: 单例模式 Singletondate: 2018-05-26 15:17:22tags:  单例设计模式确保对于一个给定的类只有一个实例存在，这个实例有一个全局唯一的访问点。通常采用懒加载的方式在第一次用到实例的时候再去创建它。 作用保证在程序运行过程中，一个类只有一个实例且易于外界访问，从而方便地控制了实例个数，并节约系统资源 使用场合统一管理资源或共享一份资源。比如，登录控制器">
+<meta property="og:description" content="单例设计模式确保对于一个给定的类只有一个实例存在，这个实例有一个全局唯一的访问点。通常采用懒加载的方式在第一次用到实例的时候再去创建它。 作用保证在程序运行过程中，一个类只有一个实例且易于外界访问，从而方便地控制了实例个数，并节约系统资源 使用场合统一管理资源或共享一份资源。比如，登录控制器，网络数据请求等。 优缺点优点 保证在程序运行过程中，一个类只有一个实例且易于外界访问，从而方便地控制了实例">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-03T08:22:42.000Z">
+<meta property="og:updated_time" content="2018-06-03T08:34:41.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="uwkit&#39;site">
-<meta name="twitter:description" content="title: 单例模式 Singletondate: 2018-05-26 15:17:22tags:  单例设计模式确保对于一个给定的类只有一个实例存在，这个实例有一个全局唯一的访问点。通常采用懒加载的方式在第一次用到实例的时候再去创建它。 作用保证在程序运行过程中，一个类只有一个实例且易于外界访问，从而方便地控制了实例个数，并节约系统资源 使用场合统一管理资源或共享一份资源。比如，登录控制器">
+<meta name="twitter:title" content="单例模式 Singleton">
+<meta name="twitter:description" content="单例设计模式确保对于一个给定的类只有一个实例存在，这个实例有一个全局唯一的访问点。通常采用懒加载的方式在第一次用到实例的时候再去创建它。 作用保证在程序运行过程中，一个类只有一个实例且易于外界访问，从而方便地控制了实例个数，并节约系统资源 使用场合统一管理资源或共享一份资源。比如，登录控制器，网络数据请求等。 优缺点优点 保证在程序运行过程中，一个类只有一个实例且易于外界访问，从而方便地控制了实例">
   
     <link rel="alternate" href="/atom.xml" title="uwkit&#39;site" type="application/atom+xml">
   
@@ -58,12 +58,19 @@
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      单例模式 Singleton
+    </h1>
+  
+
+      </header>
+    
     <div class="article-entry typo" itemprop="articleBody">
       
-        <hr>
-<p>title: 单例模式 Singleton<br>date: 2018-05-26 15:17:22<br>tags:</p>
-<hr>
-<p>单例设计模式确保对于一个给定的类只有一个实例存在，这个实例有一个全局唯一的访问点。通常采用懒加载的方式在第一次用到实例的时候再去创建它。</p>
+        <p>单例设计模式确保对于一个给定的类只有一个实例存在，这个实例有一个全局唯一的访问点。通常采用懒加载的方式在第一次用到实例的时候再去创建它。</p>
 <h5 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h5><p>保证在程序运行过程中，一个类只有一个实例且易于外界访问，从而方便地控制了实例个数，并节约系统资源</p>
 <h5 id="使用场合"><a href="#使用场合" class="headerlink" title="使用场合"></a>使用场合</h5><p>统一管理资源或共享一份资源。比如，登录控制器，网络数据请求等。</p>
 <h5 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h5><h6 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h6><ol>
@@ -78,19 +85,19 @@
 <li>只分配一次内存 <code>alloc</code></li>
 <li>考虑线程安全</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">+ (LocationManager *)sharedLocationManager;</span><br><span class="line"></span><br><span class="line">static LocationManager *_shareLocationManager;</span><br><span class="line">+ (instancetype)allocWithZone:(struct _NSZone *)zone &#123;</span><br><span class="line">//避免每次线程过来都加锁，先判断一次，如果为空才会继续加锁并创建对象</span><br><span class="line">if(_shareLocationManager == nil) &#123;</span><br><span class="line">//避免出现多个线程同时创建_instance,加锁</span><br><span class="line">@synchronized(self) &#123;</span><br><span class="line">//使用懒加载，确保_instance 只创建一次</span><br><span class="line">if(_shareLocationManager == nil) &#123;</span><br><span class="line">_shareLocationManager = [super allocWithZone:zone];</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">return _shareLocationManager;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">+ (LocationManager *)sharedLocationManager;</span><br><span class="line"></span><br><span class="line">static LocationManager *_shareLocationManager;</span><br><span class="line">+ (instancetype)allocWithZone:(struct _NSZone *)zone &#123;   </span><br><span class="line">    //避免每次线程过来都加锁，先判断一次，如果为空才会继续加锁并创建对象</span><br><span class="line">    if(_shareLocationManager == nil) &#123;</span><br><span class="line">        //避免出现多个线程同时创建_instance,加锁</span><br><span class="line">        @synchronized(self) &#123;   </span><br><span class="line">            //使用懒加载，确保_instance 只创建一次</span><br><span class="line">            if(_shareLocationManager == nil) &#123;   </span><br><span class="line">                _shareLocationManager = [super allocWithZone:zone];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;  </span><br><span class="line"></span><br><span class="line">    return _shareLocationManager;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ol>
 <li>每次获取实例都会进行判断是否需要创建实例。</li>
 <li>不加同步锁是线程不安全的，比如，有两个线程同时获取实例，A在创建实例中还没有创建完成，B通过判断也进行创建，单例的控制就会在并发的情况下失效。</li>
 <li>加锁容易引起效率降低，在加锁之前先进行判断，当需要创建对象时再加锁</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">+ (LocationManager *)sharedLocationManager;</span><br><span class="line"></span><br><span class="line">static LocationManager *_shareLocationManager;</span><br><span class="line">+ (instancetype)allocWithZone:(struct _NSZone *)zone &#123;</span><br><span class="line">static dispatch_once_t onceToken;</span><br><span class="line">dispatch_once(&amp;onceToken, ^&#123;</span><br><span class="line">_shareLocationManager = [super allocWithZone:zone];</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">return _shareLocationManager;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">+ (LocationManager *)sharedLocationManager;</span><br><span class="line"></span><br><span class="line">static LocationManager *_shareLocationManager;</span><br><span class="line">+ (instancetype)allocWithZone:(struct _NSZone *)zone &#123;   </span><br><span class="line">    static dispatch_once_t onceToken;   </span><br><span class="line">    dispatch_once(&amp;onceToken, ^&#123;   </span><br><span class="line">        _shareLocationManager = [super allocWithZone:zone];   </span><br><span class="line">    &#125;);  </span><br><span class="line"> </span><br><span class="line">    return _shareLocationManager;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ol>
 <li>声明一个静态变量去保存类的实例，确保它在类中的全局可用性。</li>
 <li>声明一个静态变量 <code>dispatch_once_t</code>，它确保初始化代码只执行一次。</li>
 <li>使用<code>dispatch_once</code>执行初始化的<code>blokc</code>，一旦类已经被初始化，初始化器将永远不会再被调用。</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">+ (LocationManager *)sharedLocationManager &#123;</span><br><span class="line">return [[self alloc]init];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (id)copyWithZone:(NSZone *)zone &#123;</span><br><span class="line">return _shareLocationManager;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (id)mutableCopyWithZone:(NSZone *)zone &#123;</span><br><span class="line">return _shareLocationManager;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">+ (LocationManager *)sharedLocationManager &#123;</span><br><span class="line">    return [[self alloc]init];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (id)copyWithZone:(NSZone *)zone &#123;   </span><br><span class="line">    return _shareLocationManager;   </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (id)mutableCopyWithZone:(NSZone *)zone &#123;   </span><br><span class="line">    return _shareLocationManager;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>当调用<code>sharedLocationManager `</code>alloc<code></code>copy`的时候，将得到的实例都是一样的。</p>
 <h6 id="static"><a href="#static" class="headerlink" title="static"></a><code>static</code></h6><ol>
 <li>修饰局部变量<br>保证局部变量永远只初始化一次，在程序的运行过程中永远只有一份内存，生命周期类似全局变量，但是作用域不变。</li>
@@ -132,7 +139,7 @@
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          (no title)
+          响应链
         
       </div>
     </a>
