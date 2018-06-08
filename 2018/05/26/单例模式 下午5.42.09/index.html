@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  <title>单例模式 Singleton | uwkit&#39;site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="单例设计模式确保对于一个给定的类只有一个实例存在，这个实例有一个全局唯一的访问点。通常采用懒加载的方式在第一次用到实例的时候再去创建它。 作用保证在程序运行过程中，一个类只有一个实例且易于外界访问，从而方便地控制了实例个数，并节约系统资源 使用场合统一管理资源或共享一份资源。比如，登录控制器，网络数据请求等。 优缺点优点 保证在程序运行过程中，一个类只有一个实例且易于外界访问，从而方便地控制了实例">
+<meta property="og:type" content="article">
+<meta property="og:title" content="单例模式 Singleton">
+<meta property="og:url" content="http://yoursite.com/2018/05/26/单例模式 下午5.42.09/index.html">
+<meta property="og:site_name" content="uwkit&#39;site">
+<meta property="og:description" content="单例设计模式确保对于一个给定的类只有一个实例存在，这个实例有一个全局唯一的访问点。通常采用懒加载的方式在第一次用到实例的时候再去创建它。 作用保证在程序运行过程中，一个类只有一个实例且易于外界访问，从而方便地控制了实例个数，并节约系统资源 使用场合统一管理资源或共享一份资源。比如，登录控制器，网络数据请求等。 优缺点优点 保证在程序运行过程中，一个类只有一个实例且易于外界访问，从而方便地控制了实例">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-06-03T08:34:41.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="单例模式 Singleton">
+<meta name="twitter:description" content="单例设计模式确保对于一个给定的类只有一个实例存在，这个实例有一个全局唯一的访问点。通常采用懒加载的方式在第一次用到实例的时候再去创建它。 作用保证在程序运行过程中，一个类只有一个实例且易于外界访问，从而方便地控制了实例个数，并节约系统资源 使用场合统一管理资源或共享一份资源。比如，登录控制器，网络数据请求等。 优缺点优点 保证在程序运行过程中，一个类只有一个实例且易于外界访问，从而方便地控制了实例">
+  
+    <link rel="alternate" href="/atom.xml" title="uwkit&#39;site" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/typing.css">
+  <link rel="stylesheet" href="/css/donate.css">
+  
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  
+</head>
+
+  
+    
+      <body>
+    
+  
+      <div id="container" class="container">
+        <article id="post-单例模式 下午5.42.09" class="article article-type-post" itemscope itemprop="blogPost">
+  <header id="header" class="header">
+    <div class="mobile-nav">
+      <h1 class="nickname">uwkit</h1>
+      <a id="menu">
+        &#9776; Menu
+      </a>
+    </div>
+    
+        <nav id="main-nav" class="main-nav">
+    
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+  </nav>
+</header>
+
+  <hr/>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      单例模式 Singleton
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry typo" itemprop="articleBody">
+      
+        <p>单例设计模式确保对于一个给定的类只有一个实例存在，这个实例有一个全局唯一的访问点。通常采用懒加载的方式在第一次用到实例的时候再去创建它。</p>
+<h5 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h5><p>保证在程序运行过程中，一个类只有一个实例且易于外界访问，从而方便地控制了实例个数，并节约系统资源</p>
+<h5 id="使用场合"><a href="#使用场合" class="headerlink" title="使用场合"></a>使用场合</h5><p>统一管理资源或共享一份资源。比如，登录控制器，网络数据请求等。</p>
+<h5 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h5><h6 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h6><ol>
+<li>保证在程序运行过程中，一个类只有一个实例且易于外界访问，从而方便地控制了实例个数，并节约系统资源。</li>
+<li>类控制了实例化过程，所以类可以更加灵活修改实例化过程。<h6 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h6></li>
+<li>单例对象一旦建立，对象指针是在保存在静态区的，单例对象在堆中分配的内存空间，会在应用程序终止之后才会被释放。</li>
+<li>不使用于变化的对象，如果同一类型的对象总是要在不同的用例场景中发生变化，单例就会引起数据的错误，不能保存彼此的状态。</li>
+<li>单例类无法继承，因此很难进行类的扩展</li>
+</ol>
+<h5 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h5><ol>
+<li>只有一个实例存在<code>static</code></li>
+<li>只分配一次内存 <code>alloc</code></li>
+<li>考虑线程安全</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">+ (LocationManager *)sharedLocationManager;</span><br><span class="line"></span><br><span class="line">static LocationManager *_shareLocationManager;</span><br><span class="line">+ (instancetype)allocWithZone:(struct _NSZone *)zone &#123;   </span><br><span class="line">    //避免每次线程过来都加锁，先判断一次，如果为空才会继续加锁并创建对象</span><br><span class="line">    if(_shareLocationManager == nil) &#123;</span><br><span class="line">        //避免出现多个线程同时创建_instance,加锁</span><br><span class="line">        @synchronized(self) &#123;   </span><br><span class="line">            //使用懒加载，确保_instance 只创建一次</span><br><span class="line">            if(_shareLocationManager == nil) &#123;   </span><br><span class="line">                _shareLocationManager = [super allocWithZone:zone];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;  </span><br><span class="line"></span><br><span class="line">    return _shareLocationManager;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>每次获取实例都会进行判断是否需要创建实例。</li>
+<li>不加同步锁是线程不安全的，比如，有两个线程同时获取实例，A在创建实例中还没有创建完成，B通过判断也进行创建，单例的控制就会在并发的情况下失效。</li>
+<li>加锁容易引起效率降低，在加锁之前先进行判断，当需要创建对象时再加锁</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">+ (LocationManager *)sharedLocationManager;</span><br><span class="line"></span><br><span class="line">static LocationManager *_shareLocationManager;</span><br><span class="line">+ (instancetype)allocWithZone:(struct _NSZone *)zone &#123;   </span><br><span class="line">    static dispatch_once_t onceToken;   </span><br><span class="line">    dispatch_once(&amp;onceToken, ^&#123;   </span><br><span class="line">        _shareLocationManager = [super allocWithZone:zone];   </span><br><span class="line">    &#125;);  </span><br><span class="line"> </span><br><span class="line">    return _shareLocationManager;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>声明一个静态变量去保存类的实例，确保它在类中的全局可用性。</li>
+<li>声明一个静态变量 <code>dispatch_once_t</code>，它确保初始化代码只执行一次。</li>
+<li>使用<code>dispatch_once</code>执行初始化的<code>blokc</code>，一旦类已经被初始化，初始化器将永远不会再被调用。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">+ (LocationManager *)sharedLocationManager &#123;</span><br><span class="line">    return [[self alloc]init];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (id)copyWithZone:(NSZone *)zone &#123;   </span><br><span class="line">    return _shareLocationManager;   </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (id)mutableCopyWithZone:(NSZone *)zone &#123;   </span><br><span class="line">    return _shareLocationManager;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当调用<code>sharedLocationManager `</code>alloc<code></code>copy`的时候，将得到的实例都是一样的。</p>
+<h6 id="static"><a href="#static" class="headerlink" title="static"></a><code>static</code></h6><ol>
+<li>修饰局部变量<br>保证局部变量永远只初始化一次，在程序的运行过程中永远只有一份内存，生命周期类似全局变量，但是作用域不变。</li>
+<li>修饰全局变量<br>使得全局变量的作用域仅限于当前的文件内部，即只有当前文件内部才能访问该全局变量。</li>
+<li>默认初始化为0<br>在静态数据区，内存中的所有字节默认值都是<code>0x00</code>。</li>
+<li>修饰函数<br>被修饰的函数被称为静态函数。</li>
+</ol>
+<h6 id="alloc"><a href="#alloc" class="headerlink" title="alloc"></a><code>alloc</code></h6><ol>
+<li><code>alloc</code>调用了<code>allocWithZone:</code>，在系统中分配内存并返回这段内存的指针。</li>
+<li><code>alloc</code>只执行一次。而<code>init</code>会从继承链的顶部开始执行，因为需要先初始化<code>[super init]</code>，所以会自上而下执行多次。</li>
+<li>将申请空间中的值都设置为0。</li>
+</ol>
+<h6 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h6><ol>
+<li>指某个函数在、函数库在多线程环境中被调用时，能正确地处理多个线程之间的共享变量，使得程序功能能正确完成。</li>
+<li>线程安全是相对于多线程而言的，单线程下不会存在线程安全问题，因为单线程下的执行顺序是确定的。</li>
+</ol>
+
+      
+    <footer class="article-footer">
+      <ul class="article-meta">
+        <li>
+          <span class="label">Published Date:</span>
+          <a href="/2018/05/26/单例模式 下午5.42.09/" class="article-date">
+  <time datetime="2018-05-26T07:17:22.000Z" itemprop="datePublished">2018-05-26</time>
+</a>
+
+        </li>
+        
+        
+        <hr/>
+      </ul>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav" class="article-nav">
+  
+    <a href="/2018/05/26/响应链/" id="article-nav-newer" class="article-nav-link-wrap newer">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          响应链
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/05/12/hello-world/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+
+
+
+
+  <section id="comments" class="comments">
+    <div id="valine_container"></div>
+  </section>
+
+
+
+      </div>
+      
+    <footer id="footer" class="post-footer footer">
+      
+        <ul class="footer-links">
+          
+            <li><a href="/archives/"><span class="fa fa-book"></span></a></li>
+          
+            <li><a href="https://github.com/WaiKitHsu"><span class="fa fa-github-alt"></span></a></li>
+          
+            <li><a href="/atom.xml"><span class="fa fa-rss"></span></a></li>
+          
+        </ul>
+	    
+      <hr/>
+      <div id="footerContent" class="footer-content">
+        <p>Let is be.</p>
+
+
+      </div>
+    </footer>
+
+      
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  <script>
+      var GUEST_INFO = ['nick','mail','link'];
+      var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+      });
+      var notify = 'false' == true;
+      var verify = 'false' == true;
+      var valine = new Valine();
+      valine.init({
+          el: '#valine_container',
+          notify: notify,
+          verify: verify,
+          appId: "2mPvqXM2072yhqf09kUxyPtz-gzGzoHsz",
+          appKey: "wnLa7vN27K4vtXe3AiqTCkYG",
+          placeholder: "have a nice day ~",
+          pageSize:'10',
+          avatar:'hide',
+          lang:'zh-cn'
+      })
+  </script>
+
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/typing.js"></script>
+<!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+
+
+
+
+
+
+
+    </div>
+  </body>
+</html>

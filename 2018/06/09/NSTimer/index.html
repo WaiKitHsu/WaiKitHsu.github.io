@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  <title>NSTimer | uwkit&#39;site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="NSTimer 定时器在固定的时间间隔被触发，被触发后给指定的目标发消息或者执行代码块中内容。使用步骤一般是创建后添加到 runloop， scheduledTimerWith 开头的创建方法默认将其添加到当前的 runloop 中。timer 必须被添加到 runloop 中才有效，所以需要保证 runloop 是有运行的。（runloop 与线程是一一对应的，主线程的 runloop 会在 a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NSTimer">
+<meta property="og:url" content="http://yoursite.com/2018/06/09/NSTimer/index.html">
+<meta property="og:site_name" content="uwkit&#39;site">
+<meta property="og:description" content="NSTimer 定时器在固定的时间间隔被触发，被触发后给指定的目标发消息或者执行代码块中内容。使用步骤一般是创建后添加到 runloop， scheduledTimerWith 开头的创建方法默认将其添加到当前的 runloop 中。timer 必须被添加到 runloop 中才有效，所以需要保证 runloop 是有运行的。（runloop 与线程是一一对应的，主线程的 runloop 会在 a">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-06-08T16:22:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NSTimer">
+<meta name="twitter:description" content="NSTimer 定时器在固定的时间间隔被触发，被触发后给指定的目标发消息或者执行代码块中内容。使用步骤一般是创建后添加到 runloop， scheduledTimerWith 开头的创建方法默认将其添加到当前的 runloop 中。timer 必须被添加到 runloop 中才有效，所以需要保证 runloop 是有运行的。（runloop 与线程是一一对应的，主线程的 runloop 会在 a">
+  
+    <link rel="alternate" href="/atom.xml" title="uwkit&#39;site" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/typing.css">
+  <link rel="stylesheet" href="/css/donate.css">
+  
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  
+</head>
+
+  
+    
+      <body>
+    
+  
+      <div id="container" class="container">
+        <article id="post-NSTimer" class="article article-type-post" itemscope itemprop="blogPost">
+  <header id="header" class="header">
+    <div class="mobile-nav">
+      <h1 class="nickname">uwkit</h1>
+      <a id="menu">
+        &#9776; Menu
+      </a>
+    </div>
+    
+        <nav id="main-nav" class="main-nav">
+    
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+  </nav>
+</header>
+
+  <hr/>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      NSTimer
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry typo" itemprop="articleBody">
+      
+        <h6 id="NSTimer-定时器"><a href="#NSTimer-定时器" class="headerlink" title="NSTimer 定时器"></a>NSTimer 定时器</h6><p>在固定的时间间隔被触发，被触发后给指定的目标发消息或者执行代码块中内容。<br>使用步骤一般是创建后添加到 runloop， scheduledTimerWith 开头的创建方法默认将其添加到当前的 runloop 中。timer 必须被添加到 runloop 中才有效，所以需要保证 runloop 是有运行的。（runloop 与线程是一一对应的，主线程的 runloop 会在 app 运行时自动运行，而子线程则需要手动获取运行，在第一次获取时才会被创建出来。）<br>—###### 部分相关的参数/方法</p>
+<ul>
+<li><code>repeats</code> 如果是 <code>YES</code>的话，定时器会保留自身，知道被<code>invalidate</code>后失效；否则会在执行完任务之后自动失效（一次性定时器）。</li>
+<li><code>timeInterval</code> 设置进行触发的时间间隔。</li>
+<li><code>block</code> 可帮助避免循环引用。</li>
+<li><code>userInfo</code> 传递的用户信息，通过传入的带有参数的<code>selector</code>（ <code>- (void)timerFireMethod:(NSTimer *)timer</code>），然后通过<code>[timer userInfo]</code>获取。</li>
+<li><code>- (void)fire;</code> 触发一次，对于一次性定时器被触发后就失效，即使还没到设置的正常触发时间；对于重复性定时器，则不会影响到正常的触发。<br>—###### 强引用相关</li>
+</ul>
+<ol>
+<li><code>self.timer</code> VC 会对 timer 有强引用 self -&gt; timer</li>
+<li><code>addTimer:forMode:</code> runloop 会对 timer 有强引用</li>
+<li><code>target:</code> timer 对 self 有强引用<br>RunLoop -&gt; timer -&gt; self ，timer 在调用后 invalidate 后失效，才会从 runloop 中移除，进而 self 才会释放。timer 在哪个线程创建就要在哪个线程调用 invalidate ，否则会使资源不能被正确的释放。<br>直接一点<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- (void)viewDidDisappear:(BOOL)animated &#123;</span><br><span class="line">    [super viewDidDisappear:animated];</span><br><span class="line">    </span><br><span class="line">    [self.timer invalidate];</span><br><span class="line">    self.timer = nil;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>如果一定要在 VC 销毁后才让它失效，像这样👇<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (void)dealloc &#123;</span><br><span class="line">    [self.timer invalidate];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>问题来了，timer 在调用后 invalidate 后失效，然后 self 中的 dealloc 才会被调用，而 invalidate 就要在 dealloc 中…<br>那么<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">_weak typeof(self) weakSelf = self;</span><br><span class="line">// 1</span><br><span class="line">_timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:weakSelf selector:@selector(timerFire:) userInfo:nil repeats:YES];</span><br></pre></td></tr></table></figure></p>
+<p>在这里传入 weakSelf 而不是 self 的区别在于，如果在 1 的位置 VC 释放了，target 就为 nil。也就是 timer 仍然对 self 有强引用。这里传入一个 weakSelf，而 timer 对传入的 target 会进行强引用，也就是强引用指向了弱引用所指向的对象（防止传入的 target 被突然释放），等价于 timer 直接强引用了对象。<br>另外，timer 即使不被引用，也可以正常运行，不会发生循环引用，但是依然会发生内存泄漏， 因为RunLoop 会对定时器的 target 保留以便到达时间间隔后进行调用。</p>
+<p>解决办法</p>
+<ol>
+<li>分类实现<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">typedef void(^TExecuteTimerBlock) (NSTimer *timer);</span><br><span class="line"></span><br><span class="line">@implementation NSTimer (Helper)</span><br><span class="line">+ (NSTimer *)timer_scheduledTimerWithTimeInterval:(NSTimeInterval)inTimeInterval block:(TExecuteTimerBlock)block repeats:(BOOL)inRepeats &#123;</span><br><span class="line">    NSTimer * timer = [self scheduledTimerWithTimeInterval:inTimeInterval target:self selector:@selector(timer_executeTimerBlock:) userInfo:[block copy] repeats:inRepeats];</span><br><span class="line">    return timer;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">+ (NSTimer *)timer_timerWithTimeInterval:(NSTimeInterval)inTimeInterval block:(TExecuteTimerBlock)block repeats:(BOOL)inRepeats &#123;</span><br><span class="line">    NSTimer * timer = [self timerWithTimeInterval:inTimeInterval target:self selector:@selector(timer_executeTimerBlock:) userInfo:[block copy] repeats:inRepeats];</span><br><span class="line">    return timer;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">+ (void)timer_executeTimerBlock:(NSTimer *)timer; &#123;</span><br><span class="line">    if([timer userInfo]) &#123;</span><br><span class="line">        TExecuteTimerBlock block = timer.userInfo;</span><br><span class="line">        block(timer);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">@end</span><br><span class="line">```2. YYWeakProxy</span><br><span class="line">通过继承 NSProxy，定义了一个弱引用的 target 对象，通过重写消息转发等方法，让 target 对象去处理接收到的消息。</span><br><span class="line">self -&gt; timer -&gt;  yyweakProxy</span><br><span class="line">yyweakProxy 对 self 弱引用，使得 self 跟 timer 之间不会有相互持有，就可以在 self 中的 dealloc 方法中成功调用 timer 的 invalidate</span><br><span class="line"></span><br><span class="line">###### 是否准时</span><br><span class="line">1. 当一个 timer 被注册到 runloop 中后，timer 会在一个事件循环中被检测一次，如果某一次事件循环的持续时间超过 timer 的间隔时间（处理了太多的耗时任务），那么被超过的那个时间点的事件就会被跳过。看到一个例子是等公交，错过了这个点的公交后你就只能等下一班的公交了。</span><br><span class="line">2. 另一个原因与加入的 runloop 的模式有关，主线程里有两个预设的 mode</span><br><span class="line">* kCFRunLoopDefaultMode 平时所处的状态</span><br><span class="line">* UITrackingRunLoopMode 追踪 scrollView 滑动时的状态</span><br><span class="line">当创建的 timer 是被加到 defaultRunloopMode 中，滑动 scrollView，runloop 会将 mode 切换为 trackingRunloopMode，这是 timer 就不会被回调，也不会影响到滑动操作。</span><br><span class="line"> </span><br><span class="line">###### 补充</span><br><span class="line">* `weakSelf / strongSelf`</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong>weak </strong>typeof__(self) weakSelf = self;<br><strong>strong </strong>typeof__(weakSelf) strongSelf = weakSelf;</p>
+<p>// @WeakSelf(self);<br>// @StrongSelf(weakSelf);</p>
+<p>#define WeakSelf(type) autoreleasepool{} <strong>weak </strong>typeof__(type) weakSelf = type;</p>
+<p>#define StrongSelf(type) autoreleasepool{} <strong>strong </strong>typeof__(type) strongSelf = type;</p>
+<p>// WeakSelf(self);<br>// StrongSelf(weakSelf);</p>
+<p>#define WeakSelf(type) <strong>weak </strong>typeof__(type) weakSelf = type;</p>
+<p>#define StrongSelf(type) <strong>strong </strong>typeof__(type) strongSelf = type;</p>
+<p>// 👆只适用于 self,👇使用面更广一些<br><strong>weak typeof(self) weakSelf = self;
+</strong>strong typeof(self) strongSelf = weakSelf;</p>
+<p>#define WeakSelf(type) autoreleasepool{} __weak typeof(type) weak##type = type;</p>
+<p>#define StrongSelf(type) autoreleasepool{} __strong typeof(weak##type) strong##type = weak##type;</p>
+<p>#define WeakSelf(type) __weak typeof(type) weak##type = type;</p>
+<p>#define StrongSelf(type) __strong typeof(weak##type) strong##type = weak##type;<br><code>`</code></p>
+
+      
+    <footer class="article-footer">
+      <ul class="article-meta">
+        <li>
+          <span class="label">Published Date:</span>
+          <a href="/2018/06/09/NSTimer/" class="article-date">
+  <time datetime="2018-06-08T16:21:39.000Z" itemprop="datePublished">2018-06-09</time>
+</a>
+
+        </li>
+        
+        
+        <hr/>
+      </ul>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav" class="article-nav">
+  
+    <span id="article-nav-newer" class="article-nav-link-wrap newer"></span>
+  
+  
+    <a href="/2018/06/03/Extension Category/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Extension Category</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+
+
+
+
+  <section id="comments" class="comments">
+    <div id="valine_container"></div>
+  </section>
+
+
+
+      </div>
+      
+    <footer id="footer" class="post-footer footer">
+      
+        <ul class="footer-links">
+          
+            <li><a href="/archives/"><span class="fa fa-book"></span></a></li>
+          
+            <li><a href="https://github.com/WaiKitHsu"><span class="fa fa-github-alt"></span></a></li>
+          
+            <li><a href="/atom.xml"><span class="fa fa-rss"></span></a></li>
+          
+        </ul>
+	    
+      <hr/>
+      <div id="footerContent" class="footer-content">
+        <p>Let is be.</p>
+
+
+      </div>
+    </footer>
+
+      
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  <script>
+      var GUEST_INFO = ['nick','mail','link'];
+      var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+      });
+      var notify = 'false' == true;
+      var verify = 'false' == true;
+      var valine = new Valine();
+      valine.init({
+          el: '#valine_container',
+          notify: notify,
+          verify: verify,
+          appId: "2mPvqXM2072yhqf09kUxyPtz-gzGzoHsz",
+          appKey: "wnLa7vN27K4vtXe3AiqTCkYG",
+          placeholder: "have a nice day ~",
+          pageSize:'10',
+          avatar:'hide',
+          lang:'zh-cn'
+      })
+  </script>
+
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/typing.js"></script>
+<!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+
+
+
+
+
+
+
+    </div>
+  </body>
+</html>
