@@ -5,17 +5,17 @@
   
   <title>NSTimer | uwkit&#39;site</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="NSTimer 定时器在固定的时间间隔被触发，被触发后给指定的目标发消息或者执行代码块中内容。 使用步骤一般是创建后添加到 runloop， scheduledTimerWith 开头的创建方法默认将其添加到当前的 runloop 中。timer 必须被添加到 runloop 中才有效，所以需要保证 runloop 是有运行的。（runloop 与线程是一一对应的，主线程的 runloop 会在">
+  <meta name="description" content="NSTimer 定时器在固定的时间间隔被触发，被触发后给指定的目标发消息或者执行代码块中内容。使用步骤一般是创建后添加到 runloop， scheduledTimerWith 开头的创建方法默认将其添加到当前的 runloop 中。timer 必须被添加到 runloop 中才有效，所以需要保证 runloop 是有运行的。（runloop 与线程是一一对应的，主线程的 runloop 会在 a">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NSTimer">
 <meta property="og:url" content="http://yoursite.com/2018/06/09/NSTimer/index.html">
 <meta property="og:site_name" content="uwkit&#39;site">
-<meta property="og:description" content="NSTimer 定时器在固定的时间间隔被触发，被触发后给指定的目标发消息或者执行代码块中内容。 使用步骤一般是创建后添加到 runloop， scheduledTimerWith 开头的创建方法默认将其添加到当前的 runloop 中。timer 必须被添加到 runloop 中才有效，所以需要保证 runloop 是有运行的。（runloop 与线程是一一对应的，主线程的 runloop 会在">
+<meta property="og:description" content="NSTimer 定时器在固定的时间间隔被触发，被触发后给指定的目标发消息或者执行代码块中内容。使用步骤一般是创建后添加到 runloop， scheduledTimerWith 开头的创建方法默认将其添加到当前的 runloop 中。timer 必须被添加到 runloop 中才有效，所以需要保证 runloop 是有运行的。（runloop 与线程是一一对应的，主线程的 runloop 会在 a">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-08T16:51:58.000Z">
+<meta property="og:updated_time" content="2018-06-08T16:55:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NSTimer">
-<meta name="twitter:description" content="NSTimer 定时器在固定的时间间隔被触发，被触发后给指定的目标发消息或者执行代码块中内容。 使用步骤一般是创建后添加到 runloop， scheduledTimerWith 开头的创建方法默认将其添加到当前的 runloop 中。timer 必须被添加到 runloop 中才有效，所以需要保证 runloop 是有运行的。（runloop 与线程是一一对应的，主线程的 runloop 会在">
+<meta name="twitter:description" content="NSTimer 定时器在固定的时间间隔被触发，被触发后给指定的目标发消息或者执行代码块中内容。使用步骤一般是创建后添加到 runloop， scheduledTimerWith 开头的创建方法默认将其添加到当前的 runloop 中。timer 必须被添加到 runloop 中才有效，所以需要保证 runloop 是有运行的。（runloop 与线程是一一对应的，主线程的 runloop 会在 a">
   
     <link rel="alternate" href="/atom.xml" title="uwkit&#39;site" type="application/atom+xml">
   
@@ -70,8 +70,8 @@
     
     <div class="article-entry typo" itemprop="articleBody">
       
-        <h6 id="NSTimer-定时器"><a href="#NSTimer-定时器" class="headerlink" title="NSTimer 定时器"></a>NSTimer 定时器</h6><p>在固定的时间间隔被触发，被触发后给指定的目标发消息或者执行代码块中内容。</p>
-<h2 id="使用步骤一般是创建后添加到-runloop，-scheduledTimerWith-开头的创建方法默认将其添加到当前的-runloop-中。timer-必须被添加到-runloop-中才有效，所以需要保证-runloop-是有运行的。（runloop-与线程是一一对应的，主线程的-runloop-会在-app-运行时自动运行，而子线程则需要手动获取运行，在第一次获取时才会被创建出来。）"><a href="#使用步骤一般是创建后添加到-runloop，-scheduledTimerWith-开头的创建方法默认将其添加到当前的-runloop-中。timer-必须被添加到-runloop-中才有效，所以需要保证-runloop-是有运行的。（runloop-与线程是一一对应的，主线程的-runloop-会在-app-运行时自动运行，而子线程则需要手动获取运行，在第一次获取时才会被创建出来。）" class="headerlink" title="使用步骤一般是创建后添加到 runloop， scheduledTimerWith 开头的创建方法默认将其添加到当前的 runloop 中。timer 必须被添加到 runloop 中才有效，所以需要保证 runloop 是有运行的。（runloop 与线程是一一对应的，主线程的 runloop 会在 app 运行时自动运行，而子线程则需要手动获取运行，在第一次获取时才会被创建出来。）"></a>使用步骤一般是创建后添加到 runloop， scheduledTimerWith 开头的创建方法默认将其添加到当前的 runloop 中。timer 必须被添加到 runloop 中才有效，所以需要保证 runloop 是有运行的。（runloop 与线程是一一对应的，主线程的 runloop 会在 app 运行时自动运行，而子线程则需要手动获取运行，在第一次获取时才会被创建出来。）</h2><h6 id="部分相关的参数-方法"><a href="#部分相关的参数-方法" class="headerlink" title="部分相关的参数/方法"></a>部分相关的参数/方法</h6><ul>
+        <h6 id="NSTimer-定时器"><a href="#NSTimer-定时器" class="headerlink" title="NSTimer 定时器"></a>NSTimer 定时器</h6><p>在固定的时间间隔被触发，被触发后给指定的目标发消息或者执行代码块中内容。<br>使用步骤一般是创建后添加到 runloop， scheduledTimerWith 开头的创建方法默认将其添加到当前的 runloop 中。timer 必须被添加到 runloop 中才有效，所以需要保证 runloop 是有运行的。（runloop 与线程是一一对应的，主线程的 runloop 会在 app 运行时自动运行，而子线程则需要手动获取运行，在第一次获取时才会被创建出来。）</p>
+<h6 id="部分相关的参数-方法"><a href="#部分相关的参数-方法" class="headerlink" title="部分相关的参数/方法"></a>部分相关的参数/方法</h6><ul>
 <li><code>repeats</code> 如果是 <code>YES</code>的话，定时器会保留自身，知道被<code>invalidate</code>后失效；否则会在执行完任务之后自动失效（一次性定时器）。</li>
 <li><code>timeInterval</code> 设置进行触发的时间间隔。</li>
 <li><code>block</code> 可帮助避免循环引用。</li>
